@@ -1,589 +1,619 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Impulsa tu equipo con IA — Cursos</title>
-  <meta name="description" content="Cursos de IA para aumentar la productividad en PYMEs guatemaltecas. Versiones, FAQ y contacto."/>
-  <link rel="icon" href="https://i.imgur.com/kTSdMiT.png" onerror="this.href='';">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    :root{
-      --base:#20FFEC;      /* Fondo general vibrante */
-      --hero:#023047;      /* Encabezado y CTA oscuro */
-      --deep:#101338;      /* Azul profundo textos/títulos */
-      --mint:#80FFF5;      /* Tarjetas menta */
-      --neon:#07FFFF;      /* Hover y acentos vivos */
-      --llac:#E0FDA5;      /* Amarillo/verde neón suave */
-      --huint:#023831;     /* Borde profundo / títulos */
-      --blue:#0077BB;      /* Azul botones/íconos */
-      --green:#20B271;     /* Verde acento */
-      --mint2:#90FFEC;     /* Variación menta clara */
-      --white:#FFFFFF;
-      --text:#101338;
-    }
-    body{
-      background: var(--base);
-      color: var(--text);
-      font-feature-settings:"liga" 1,"kern" 1;
-    }
-    /* Tipografías de sistema próximas a Montserrat/Open Sans */
-    .font-title{ font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif; font-weight: 800; letter-spacing:.2px;}
-    .font-body{ font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ant-Ara | Strategic Dashboard</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://i.imgur.com/OO7URKU.png">
+    <!-- Fonts: DM Serif Display & Inter (NO ITALICS) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --ant-cyan: #00F5D4;
+            --ant-metal: #2A2F36;
+            --ant-light: #E0EAF3;
+            --ant-shadow: #0E1116;
+            --ant-teal: #2F4F4F;
+            --ant-dark-card: #1A1D29;
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
 
-    /* Botones redondeados con sombra sutil */
-    .btn{
-      border-radius: 9999px;
-      box-shadow: 0 6px 16px rgba(0,0,0,.08);
-      transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
-    }
-    .btn:focus{ outline: 3px solid var(--neon); outline-offset: 2px; }
-    .btn:hover{ filter: brightness(.95); transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,0,0,.12); }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--ant-shadow);
+            color: #FFFFFF;
+            transition: var(--transition);
+            overflow-x: hidden;
+            font-style: normal !important;
+        }
 
-    /* Tarjetas */
-    .card{
-      border-radius: 14px;
-      border: 2px solid var(--huint);
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .card:hover{ transform: translateY(-2px); box-shadow: 0 12px 28px rgba(2,48,71,.18); }
+        /* Aura del Cursor (Desktop) */
+        @media (min-width: 1024px) {
+            body { cursor: none; }
+            #cursor-aura {
+                position: fixed;
+                width: 400px;
+                height: 400px;
+                background: radial-gradient(circle, rgba(0, 245, 212, 0.08) 0%, transparent 70%);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                transform: translate(-50%, -50%);
+                will-change: transform;
+            }
+            #cursor-dot {
+                position: fixed;
+                width: 6px;
+                height: 6px;
+                background: var(--ant-cyan);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 10000;
+                transform: translate(-50%, -50%);
+            }
+        }
 
-    .container-pad{ padding-left:1rem; padding-right:1rem; }
-    @media (min-width:1024px){ .container-pad{ padding-left:2rem; padding-right:2rem; } }
+        h1, h2, h3, .font-heading { 
+            font-family: 'DM Serif Display', serif; 
+            font-style: normal !important;
+        }
 
-    .divider{ height:1px; background: rgba(16,19,56,.15); }
+        /* Cintillo Superior Estilo Tigo */
+        .top-console-bar {
+            background: rgba(14, 17, 22, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-    /* Acordeón */
-    .faq-q{ cursor: pointer; }
-    .rotate-90{ transform: rotate(90deg); }
+        .brand-text-center {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            letter-spacing: 0.4em;
+            font-size: 1.2rem;
+            color: #FFFFFF;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
 
-    /* Accesibilidad de foco */
-    .focus-ring:focus{ outline: 3px solid var(--neon); outline-offset: 2px; }
+        /* Dashboard Grid System */
+        .dash-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
 
-    /* Chips/etiquetas */
-    .chip{
-      border-radius: 9999px;
-      background: rgba(255,255,255,.18);
-      color: var(--white);
-      padding: .25rem .6rem;
-      font-size: .75rem;
-      letter-spacing: .2px;
-    }
-  </style>
+        .dash-card {
+            background: var(--ant-dark-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 2rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dash-card:hover {
+            border-color: var(--ant-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-main {
+            background: var(--ant-cyan);
+            color: var(--ant-shadow);
+            font-weight: 800;
+            padding: 0.9rem 2.2rem;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.75rem;
+            transition: var(--transition);
+        }
+
+        .btn-main:hover {
+            background: #FFFFFF;
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(0, 245, 212, 0.3);
+        }
+
+        .btn-sparkle {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 245, 212, 0.3);
+            color: var(--ant-cyan);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            margin-top: 1rem;
+        }
+
+        .btn-sparkle:hover {
+            background: var(--ant-cyan);
+            color: var(--ant-shadow);
+        }
+
+        /* Mockup de Reels/Insights */
+        .reel-mockup {
+            aspect-ratio: 9/16;
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .reel-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.95));
+        }
+
+        /* Icono de ANTI con Marco Redondo Sobresaliente */
+        .anti-avatar-container {
+            position: relative;
+            width: 55px;
+            height: 55px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .anti-avatar-container:hover {
+            transform: scale(1.1);
+        }
+
+        .anti-avatar-ring {
+            position: absolute;
+            inset: -4px;
+            border: 2px solid var(--ant-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(0, 245, 212, 0.5);
+            animation: pulse-ring 2s infinite;
+        }
+
+        .anti-avatar-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--ant-shadow);
+            background: var(--ant-shadow);
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.6; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(0, 245, 212, 0.2);
+            border-top: 2px solid var(--ant-cyan);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--ant-shadow); }
+        ::-webkit-scrollbar-thumb { background: var(--ant-teal); border-radius: 10px; }
+
+        @media (max-width: 1024px) {
+            .dash-container { grid-template-columns: 1fr; padding: 1.5rem; }
+            .top-console-bar { padding: 0 1.5rem; }
+            .brand-text-center { letter-spacing: 0.2em; font-size: 1rem; }
+        }
+    </style>
 </head>
-<body class="antialiased font-body">
-  <!-- Barra superior -->
-  <header class="w-full" style="background: var(--hero);">
-    <div class="max-w-6xl mx-auto container-pad py-3 flex items-center justify-between text-white">
-      <div class="flex items-center gap-3">
-        <!-- Logo Ant-Ara -->
-        <img src="https://i.imgur.com/SKoVsSp.png" alt="Ant-Ara" class="w-28 h-auto" onerror="this.src=''; this.alt='Imagen no disponible'; this.style.display='none';"/>
-        <span class="font-title text-base">Bajo la sombrilla de Ant-Ara</span>
-      </div>
-      <nav class="hidden md:flex items-center gap-6">
-        <a href="#cursos" class="hover:opacity-80">Cursos</a>
-        <a href="#versiones" class="hover:opacity-80">Versiones</a>
-        <a href="#faq" class="hover:opacity-80">FAQ</a>
-        <a href="#conocenos" class="hover:opacity-80">Conócenos</a>
-        <a href="#alianzas" class="hover:opacity-80">Alianzas</a>
-        <a href="#contacto" class="hover:opacity-80">Contacto</a>
-      </nav>
-      <a href="#cursos" class="btn bg-[color:var(--blue)] text-white px-4 py-2 text-sm">Explora los cursos</a>
-    </div>
-  </header>
+<body class="dark-mode">
 
-  <!-- Hero -->
-  <section class="w-full" style="background: var(--hero);">
-    <div class="max-w-6xl mx-auto container-pad py-14 md:py-20 grid md:grid-cols-12 gap-10 items-center">
-      <div class="md:col-span-7">
-        <div class="flex items-center gap-2 mb-4">
-          <span class="chip">IA aplicada</span>
-          <span class="chip">Productividad</span>
-          <span class="chip">Equipos</span>
-        </div>
-        <h1 class="font-title leading-tight" style="color: var(--white); font-size: clamp(32px, 5vw, 48px);">
-          Impulsa tu equipo con IA
-        </h1>
-        <p class="mt-4 text-[color:var(--llac)]" style="font-size: clamp(16px, 2.2vw, 20px);">
-          Cursos diseñados para aumentar la productividad en PYMEs guatemaltecas
-        </p>
-        <div class="mt-8 flex flex-wrap items-center gap-4">
-          <a href="#cursos" class="btn bg-[color:var(--blue)] text-white px-6 py-3 font-semibold">Explora los cursos</a>
-          <a href="#versiones" class="btn bg-[color:var(--neon)] text-[color:var(--hero)] px-6 py-3 font-semibold">Ver versiones</a>
-        </div>
-      </div>
-      <!-- Visual: foto sugerida sustituida por un mockup vector sin imágenes externas -->
-      <div class="md:col-span-5">
-        <div class="relative w-full h-64 md:h-80 card overflow-hidden" style="background: linear-gradient(135deg, rgba(7,255,255,.15), rgba(224,253,165,.15));">
-          <!-- Pantallas -->
-          <div class="absolute inset-6 rounded-lg border-2" style="border-color: var(--neon);"></div>
-          <div class="absolute left-6 right-6 bottom-6 h-8 rounded-md" style="background: rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.25);"></div>
-          <!-- Overlays de íconos IA -->
-          <div class="absolute -top-3 left-5 bg-[color:var(--blue)] text-white px-3 py-1 rounded-full text-xs shadow">⚙️ Automatiza</div>
-          <div class="absolute top-10 -right-3 bg-[color:var(--green)] text-[color:var(--hero)] px-3 py-1 rounded-full text-xs shadow">📊 Dashboards</div>
-          <div class="absolute bottom-10 right-8 bg-[color:var(--llac)] text-[color:var(--deep)] px-3 py-1 rounded-full text-xs shadow">🧠 Ética</div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- Cursor Artifacts -->
+    <div id="cursor-aura"></div>
+    <div id="cursor-dot"></div>
 
-  <!-- Divider suave sobre base -->
-  <div class="divider w-full"></div>
-
-  <!-- Sección de cursos -->
-  <section id="cursos" class="w-full">
-    <div class="max-w-6xl mx-auto container-pad py-14">
-      <h2 class="font-title text-3xl md:text-4xl" style="color: var(--deep);">Nuestros cursos</h2>
-      <p class="mt-3 max-w-3xl text-[color:var(--deep)]/80">
-        Programas prácticos para aplicar desde el primer día. Alternamos tarjetas en Neon Llac y Neon Mint para una lectura ágil.
-      </p>
-
-      <div class="mt-8 grid md:grid-cols-2 gap-6">
-        <!-- AIFPC® – Engranaje + rayo -->
-        <article class="card p-6 bg-[color:var(--llac)]">
-          <div class="flex items-start justify-between gap-4">
-            <div>
-              <h3 class="font-title text-xl" style="color: var(--deep);">AIFPC® — Automatización para PYMEs</h3>
-              <p class="mt-1 text-[color:var(--deep)]/80">Duración: 4 semanas</p>
-            </div>
-            <!-- Ícono: engranaje + rayo -->
-            <svg viewBox="0 0 64 64" class="w-10 h-10" aria-hidden="true">
-              <circle cx="32" cy="32" r="14" fill="none" stroke="#0077BB" stroke-width="3"/>
-              <path d="M32 18l3 4 5-1 1 5 4 3-4 3 1 5-5 1-3 4-3-4-5 1-1-5-4-3 4-3-1-5 5-1 3-4z" fill="none" stroke="#0077BB" stroke-width="2"/>
-              <path d="M36 12l-8 14h6l-4 12 12-16h-6l0-10z" fill="#0077BB" opacity=".9"/>
-            </svg>
-          </div>
-          <ul class="mt-3 text-[color:var(--deep)]/90 list-disc pl-5 space-y-1">
-            <li>Ahorro de tiempo</li>
-            <li>Reducción de errores</li>
-            <li>Escalabilidad</li>
-          </ul>
-          <button class="btn mt-5 bg-[color:var(--hero)] text-white px-5 py-3 w-full" data-open="aifpc">Ver más</button>
-        </article>
-
-        <!-- GAIPC® – Pantalla + burbuja de texto -->
-        <article class="card p-6 bg-[color:var(--mint)]">
-          <div class="flex items-start justify-between gap-4">
-            <div>
-              <h3 class="font-title text-xl" style="color: var(--deep);">GAIPC® — Dashboards con IA</h3>
-              <p class="mt-1 text-[color:var(--deep)]/80">Duración: 3 semanas</p>
-            </div>
-            <!-- Ícono: pantalla + burbuja -->
-            <svg viewBox="0 0 64 64" class="w-10 h-10" aria-hidden="true">
-              <rect x="10" y="14" width="44" height="28" rx="4" fill="none" stroke="#20B271" stroke-width="3"/>
-              <rect x="16" y="20" width="12" height="8" fill="#20B271"/>
-              <rect x="32" y="20" width="16" height="8" fill="#20B271" opacity=".6"/>
-              <path d="M20 50h24" stroke="#20B271" stroke-width="3" stroke-linecap="round"/>
-              <path d="M40 38h12l-4 4 4 4H40z" fill="#20B271"/>
-            </svg>
-          </div>
-          <ul class="mt-3 text-[color:var(--deep)]/90 list-disc pl-5 space-y-1">
-            <li>Mejor decisión</li>
-            <li>Visualización estratégica</li>
-            <li>Storytelling de datos</li>
-          </ul>
-          <button class="btn mt-5 bg-[color:var(--hero)] text-white px-5 py-3 w-full" data-open="gaipc">Ver más</button>
-        </article>
-
-        <!-- AIPMFPC™ – Calendario + gráfico -->
-        <article class="card p-6 bg-[color:var(--llac)]">
-          <div class="flex items-start justify-between gap-4">
-            <div>
-              <h3 class="font-title text-xl" style="color: var(--deep);">AIPMFPC™ — Ética aplicada a IA</h3>
-              <p class="mt-1 text-[color:var(--deep)]/80">Duración: 2 semanas</p>
-            </div>
-            <!-- Ícono: calendario + gráfico -->
-            <svg viewBox="0 0 64 64" class="w-10 h-10" aria-hidden="true">
-              <rect x="10" y="16" width="44" height="34" rx="4" fill="none" stroke="#70F1A4" stroke-width="3"/>
-              <path d="M10 24h44" stroke="#70F1A4" stroke-width="3"/>
-              <rect x="18" y="34" width="6" height="10" fill="#70F1A4"/>
-              <rect x="28" y="30" width="6" height="14" fill="#70F1A4" opacity=".7"/>
-              <rect x="38" y="26" width="6" height="18" fill="#70F1A4" opacity=".5"/>
-            </svg>
-          </div>
-          <ul class="mt-3 text-[color:var(--deep)]/90 list-disc pl-5 space-y-1">
-            <li>Responsabilidad</li>
-            <li>Transparencia</li>
-            <li>Confianza</li>
-          </ul>
-          <button class="btn mt-5 bg-[color:var(--hero)] text-white px-5 py-3 w-full" data-open="aipmfpc">Ver más</button>
-        </article>
-
-        <!-- SMPC® – Personas conectadas -->
-        <article class="card p-6 bg-[color:var(--mint)]">
-          <div class="flex items-start justify-between gap-4">
-            <div>
-              <h3 class="font-title text-xl" style="color: var(--deep);">SMPC® — Productividad personal con IA</h3>
-              <p class="mt-1 text-[color:var(--deep)]/80">Duración: 3 semanas</p>
-            </div>
-            <!-- Ícono: personas conectadas -->
-            <svg viewBox="0 0 64 64" class="w-10 h-10" aria-hidden="true">
-              <circle cx="20" cy="24" r="6" fill="none" stroke="#09C" stroke-width="3"/>
-              <circle cx="44" cy="24" r="6" fill="none" stroke="#09C" stroke-width="3"/>
-              <path d="M14 40c0-6 12-6 12 0v6H14v-6zM38 40c0-6 12-6 12 0v6H38v-6z" fill="none" stroke="#09C" stroke-width="3"/>
-              <path d="M26 24h12" stroke="#09C" stroke-width="3"/>
-            </svg>
-          </div>
-          <ul class="mt-3 text-[color:var(--deep)]/90 list-disc pl-5 space-y-1">
-            <li>Menos estrés</li>
-            <li>Más claridad</li>
-            <li>Mejores hábitos</li>
-          </ul>
-          <button class="btn mt-5 bg-[color:var(--hero)] text-white px-5 py-3 w-full" data-open="smpc">Ver más</button>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider w-full"></div>
-
-  <!-- Versiones / Paquetes -->
-  <section id="versiones" class="w-full">
-    <div class="max-w-6xl mx-auto container-pad py-14">
-      <h2 class="font-title text-3xl md:text-4xl" style="color: var(--huint);">Versiones disponibles</h2>
-      <p class="mt-3 max-w-3xl text-[color:var(--deep)]/80">
-        Elige el paquete que mejor se ajuste a tu equipo. Podemos personalizar contenidos y horarios.
-      </p>
-
-      <div class="mt-8 grid md:grid-cols-2 gap-6">
-        <!-- Estándar -->
-        <article class="card p-6 bg-[color:var(--llac)]">
-          <div class="flex items-center justify-between">
-            <h3 class="font-title text-xl" style="color: var(--deep);">Estándar</h3>
-            <svg viewBox="0 0 24 24" class="w-7 h-7" aria-hidden="true">
-              <path d="M20 6L9 17l-5-5" fill="none" stroke="#20B271" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <ul class="mt-3 text-[color:var(--deep)]/90 space-y-1">
-            <li>Sesiones en vivo grupales</li>
-            <li>Material base y guías</li>
-            <li>Soporte por correo</li>
-          </ul>
-        </article>
-
-        <!-- Full Premium -->
-        <article class="card p-6" style="background: var(--neon);">
-          <div class="flex items-center justify-between">
-            <h3 class="font-title text-xl" style="color: var(--deep);">Full Premium</h3>
-            <svg viewBox="0 0 64 64" class="w-7 h-7" aria-hidden="true">
-              <path d="M32 10l7 14 16 2-12 12 3 16-14-8-14 8 3-16L9 26l16-2 7-14z" fill="#023047"/>
-            </svg>
-          </div>
-          <ul class="mt-3 text-[color:var(--deep)]/90 space-y-1">
-            <li>Mentorías 1:1</li>
-            <li>Plantillas avanzadas</li>
-            <li>Soporte prioritario</li>
-          </ul>
-        </article>
-      </div>
-
-      <div class="mt-6 flex justify-end">
-        <a href="#contacto" class="btn bg-[color:var(--hero)] text-white px-6 py-3 font-semibold border-2" style="border-color: var(--base);">
-          Solicita cotización grupal
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider w-full"></div>
-
-  <!-- FAQ -->
-  <section id="faq" class="w-full" style="background: #9CFCEC;">
-    <div class="max-w-6xl mx-auto container-pad py-14">
-      <h2 class="font-title text-3xl md:text-4xl" style="color: var(--hero);">Preguntas frecuentes</h2>
-      <div class="mt-8 space-y-4">
-        <!-- Item -->
-        <div class="card bg-white/70 p-4">
-          <button class="faq-q w-full flex items-center justify-between text-left">
-            <div class="flex items-center gap-3">
-              <span class="inline-flex items-center justify-center w-7 h-7 rounded-full text-white" style="background: var(--blue);">?</span>
-              <span class="font-semibold" style="color: var(--hero);">¿Los cursos requieren conocimientos técnicos previos?</span>
-            </div>
-            <svg viewBox="0 0 24 24" class="w-5 h-5 text-[color:var(--blue)]"><path d="M8 5l8 7-8 7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-          </button>
-          <div class="faq-a mt-3 hidden text-[color:var(--deep)]/90">
-            No. Partimos de conceptos claros y actividades prácticas para todo nivel.
-          </div>
-        </div>
-
-        <div class="card bg-white/70 p-4">
-          <button class="faq-q w-full flex items-center justify-between text-left">
-            <div class="flex items-center gap-3">
-              <span class="inline-flex items-center justify-center w-7 h-7 rounded-full text-white" style="background: var(--blue);">!</span>
-              <span class="font-semibold" style="color: var(--hero);">¿Podemos adaptar el contenido a nuestra industria?</span>
-            </div>
-            <svg viewBox="0 0 24 24" class="w-5 h-5 text-[color:var(--blue)]"><path d="M8 5l8 7-8 7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-          </button>
-          <div class="faq-a mt-3 hidden text-[color:var(--deep)]/90">
-            Sí. Ofrecemos personalizaciones por sector y tamaño de empresa.
-          </div>
-        </div>
-
-        <div class="card bg-white/70 p-4">
-          <button class="faq-q w-full flex items-center justify-between text-left">
-            <div class="flex items-center gap-3">
-              <span class="inline-flex items-center justify-center w-7 h-7 rounded-full text-white" style="background: var(--blue);">✓</span>
-              <span class="font-semibold" style="color: var(--hero);">¿Incluyen plantillas y herramientas?</span>
-            </div>
-            <svg viewBox="0 0 24 24" class="w-5 h-5 text-[color:var(--blue)]"><path d="M8 5l8 7-8 7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-          </button>
-          <div class="faq-a mt-3 hidden text-[color:var(--deep)]/90">
-            Sí. Acceso a plantillas listas y opciones gratuitas o de bajo costo.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider w-full"></div>
-
-  <!-- Alianzas / Ecosistema -->
-  <section id="alianzas" class="w-full">
-    <div class="max-w-6xl mx-auto container-pad py-12">
-      <h2 class="font-title text-3xl md:text-4xl" style="color: var(--deep);">Ecosistema y bastiones</h2>
-      <p class="mt-3 text-[color:var(--deep)]/80 max-w-3xl">Esta iniciativa vive bajo la sombrilla de Ant-Ara, con Innovar con Alejandro (ICA) y Jorge como bastiones clave para mercadear y llevar la propuesta a más equipos.</p>
-
-      <div class="mt-8 grid md:grid-cols-3 gap-6 items-stretch">
-        <!-- Ant-Ara -->
-        <article class="card bg-white/60 p-6 flex flex-col items-center justify-between text-center">
-          <img src="https://i.imgur.com/SKoVsSp.png" alt="Ant-Ara" class="h-14 w-auto" onerror="this.src=''; this.alt='Logo no disponible'; this.style.display='none';"/>
-          <p class="mt-3 text-[color:var(--deep)]/85">La sombrilla estratégica. Dirección, alianzas y marco de calidad.</p>
-          <div class="mt-4 flex items-center gap-3">
-            <img src="https://i.imgur.com/kTSdMiT.png" alt="Favicon Ant-Ara" class="w-6 h-6" onerror="this.src=''; this.alt='Favicon no disponible'; this.style.display='none';"/>
-          </div>
-        </article>
-
-        <!-- Innovar con Alejandro (ICA) -->
-        <article class="card bg-white/60 p-6 flex flex-col items-center justify-between text-center">
-          <img src="https://i.imgur.com/TcIVYL5.png" alt="Innovar con Alejandro" class="h-14 w-auto" onerror="this.src=''; this.alt='Logo no disponible'; this.style.display='none';"/>
-          <p class="mt-3 text-[color:var(--deep)]/85">Puente de contenidos y comunidad. Divulgación y capacitación práctica.</p>
-          <div class="mt-4 flex items-center gap-3">
-            <img src="https://i.imgur.com/U1mRq72.png" alt="Favicon ICA" class="w-6 h-6" onerror="this.src=''; this.alt='Favicon no disponible'; this.style.display='none';"/>
-          </div>
-        </article>
-
-        <!-- Despacho de Jorge -->
-        <article class="card bg-white/60 p-6 flex flex-col items-center justify-between text-center">
-          <img src="https://i.imgur.com/yAGhSA4.png" alt="Despacho de Jorge" class="h-14 w-auto" onerror="this.src=''; this.alt='Logo no disponible'; this.style.display='none';"/>
-          <p class="mt-3 text-[color:var(--deep)]/85">Bastión comercial y de relaciones. Acompañamiento en despliegues.</p>
-          <div class="mt-4 flex items-center gap-3">
-            <img src="https://i.imgur.com/ObMZWAw.png" alt="Favicon Jorge Luis" class="w-6 h-6" onerror="this.src=''; this.alt='Favicon no disponible'; this.style.display='none';"/>
-          </div>
-        </article>
-      </div>
-
-      <div class="mt-8 grid md:grid-cols-2 gap-6">
-        <div class="card p-6 bg-[color:var(--llac)]">
-          <h3 class="font-title text-xl" style="color: var(--deep);">Canales Oficiales</h3>
-          <ul class="mt-3 text-[color:var(--deep)]/90 space-y-2">
-            <li>Telegram: @productividadconia · @innovarconalejandro</li>
-            <li>Grupo Telegram: <a class="underline" href="https://t.me/productividadconiachat" target="_blank" rel="noopener">productividadconiachat</a> · <a class="underline" href="https://t.me/chatdeinnovarconalejandro" target="_blank" rel="noopener">chatdeinnovarconalejandro</a></li>
-            <li>Correo: contacto@ant-ara.com · contacto@innovarconalejandro.com</li>
-            <li>Redes: LinkedIn · Instagram</li>
-          </ul>
-        </div>
-        <div class="card p-6 bg-[color:var(--mint)]">
-          <h3 class="font-title text-xl" style="color: var(--deep);">Ecosistema digital</h3>
-          <ul class="mt-3 text-[color:var(--deep)]/90 space-y-2">
-            <li><a class="underline" href="https://ant-ara.com" target="_blank" rel="noopener">ant-ara.com</a> — Sombrilla</li>
-            <li><a class="underline" href="https://innovarconalejandro.com" target="_blank" rel="noopener">innovarconalejandro.com</a> — Contenido y cursos</li>
-            <li>Despacho de Jorge — dominio en preparación</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider w-full"></div>
-
-  <!-- Conócenos -->
-  <section id="conocenos" class="w-full" style="background: var(--green);">
-    <div class="max-w-6xl mx-auto container-pad py-14 text-white">
-      <h2 class="font-title text-3xl md:text-4xl">Nuestra misión</h2>
-      <div class="grid md:grid-cols-12 gap-8 items-center mt-6">
-        <div class="md:col-span-7">
-          <p class="text-[color:var(--llac)] text-lg">
-            Diseñamos cursos que combinan inteligencia artificial, productividad y aplicabilidad real para transformar equipos de trabajo en empresas guatemaltecas.
-          </p>
-          <div class="mt-6 flex flex-wrap gap-3">
-            <span class="chip bg-white/15">Mentoría</span>
-            <span class="chip bg-white/15">Casos reales</span>
-            <span class="chip bg-white/15">Acompañamiento</span>
-          </div>
-        </div>
-        <!-- Avatar/ilustración vectorial del mentor (sugerido) -->
-        <div class="md:col-span-5">
-          <div class="relative w-full h-64 md:h-72 card overflow-hidden" style="background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.35);">
-            <svg viewBox="0 0 200 200" class="absolute inset-0 w-full h-full" aria-hidden="true">
-              <!-- Fondo abstracto IA -->
-              <defs>
-                <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
-                  <stop offset="0" stop-color="#07FFFF" stop-opacity=".4"/>
-                  <stop offset="1" stop-color="#E0FDA5" stop-opacity=".3"/>
-                </linearGradient>
-              </defs>
-              <rect x="0" y="0" width="200" height="200" fill="url(#g1)"/>
-              <!-- Avatar simple -->
-              <circle cx="100" cy="70" r="28" fill="#FFFFFF"/>
-              <rect x="55" y="110" width="90" height="50" rx="18" fill="#FFFFFF"/>
-              <!-- Detalles -->
-              <circle cx="92" cy="65" r="4" fill="#023047"/>
-              <circle cx="108" cy="65" r="4" fill="#023047"/>
-              <path d="M90 78c6 6 14 6 20 0" stroke="#023047" stroke-width="3" fill="none" stroke-linecap="round"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider w-full"></div>
-
-  <!-- Contacto -->
-  <section id="contacto" class="w-full" style="background: var(--white);">
-    <div class="max-w-6xl mx-auto container-pad py-14">
-      <h2 class="font-title text-3xl md:text-4xl" style="color: var(--deep);">¿Listo para transformar tu equipo?</h2>
-      <p class="mt-3 text-[color:var(--deep)]/80">Agenda una llamada o envía tu consulta. Demo visible: no envía mensajes reales.</p>
-
-      <form class="card bg-[color:var(--mint2)]/20 p-6 mt-6 grid md:grid-cols-2 gap-4" onsubmit="handleDemoSubmit(event)">
-        <div>
-          <label class="block text-sm font-semibold mb-2" style="color: var(--huint);">Nombre completo</label>
-          <input required type="text" class="w-full p-3 rounded-md border focus-ring" style="border-color: var(--huint); background: #FFFFFF;" placeholder="Tu nombre"/>
-        </div>
-        <div>
-          <label class="block text-sm font-semibold mb-2" style="color: var(--huint);">Correo electrónico</label>
-          <input required type="email" class="w-full p-3 rounded-md border focus-ring" style="border-color: var(--huint); background: #FFFFFF;" placeholder="nombre@correo.com"/>
-        </div>
-        <div class="md:col-span-2">
-          <label class="block text-sm font-semibold mb-2" style="color: var(--huint);">Mensaje</label>
-          <textarea required rows="5" class="w-full p-3 rounded-md border focus-ring" style="border-color: var(--huint); background: #FFFFFF;" placeholder="Cuéntame de tu equipo y objetivos"></textarea>
-        </div>
-        <div class="md:col-span-2 flex items-center justify-between">
-          <span class="text-sm text-[color:var(--deep)]/70">Tiempo de respuesta: 48 horas hábiles.</span>
-          <button type="submit" class="btn bg-[color:var(--neon)] text-[color:var(--hero)] px-6 py-3 font-semibold">Agenda una llamada</button>
-        </div>
-      </form>
-
-      <div id="formResult" class="hidden mt-4 p-4 rounded-md border" style="border-color: var(--huint); background: #ECFDF5; color:#065F46;">
-        ¡Listo! Tu consulta de prueba quedó registrada en esta demo.
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="w-full" style="background: var(--deep);">
-    <div class="max-w-6xl mx-auto container-pad py-10 text-white">
-      <div class="grid md:grid-cols-3 gap-8">
-        <div>
-          <h3 class="font-title text-xl" style="color: var(--base);">¿Listo para transformar tu equipo?</h3>
-          <p class="mt-2 text-white/80">Tel: +502 0000 0000 — hola@tuempresa.gt</p>
-        </div>
-        <div>
-          <h4 class="font-semibold mb-2">Navegación</h4>
-          <ul class="space-y-1 text-white/80">
-            <li><a href="#cursos" class="hover:opacity-80">Cursos</a></li>
-            <li><a href="#versiones" class="hover:opacity-80">Versiones</a></li>
-            <li><a href="#faq" class="hover:opacity-80">FAQ</a></li>
-            <li><a href="#conocenos" class="hover:opacity-80">Conócenos</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="font-semibold mb-2">Acción</h4>
-          <a href="#contacto" class="btn bg-[color:var(--neon)] text-[color:var(--hero)] px-6 py-3 font-semibold inline-block">Agenda una llamada</a>
-        </div>
-      </div>
-      <div class="mt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-white/80 text-sm">
-        <span>© <span id="year"></span> Ant-Ara · ICA · Despacho de Jorge</span>
+    <!-- CINTILLO SUPERIOR (CENTRAL BRANDING) -->
+    <header class="top-console-bar">
         <div class="flex items-center gap-4">
-          <img src="https://i.imgur.com/kTSdMiT.png" alt="Favicon Ant-Ara" class="w-5 h-5" onerror="this.src=''; this.alt='Icono no disponible'; this.style.display='none';"/>
-          <img src="https://i.imgur.com/U1mRq72.png" alt="Favicon ICA" class="w-5 h-5" onerror="this.src=''; this.alt='Icono no disponible'; this.style.display='none';"/>
-          <img src="https://i.imgur.com/ObMZWAw.png" alt="Favicon Jorge" class="w-5 h-5" onerror="this.src=''; this.alt='Icono no disponible'; this.style.display='none';"/>
+            <button class="p-2 hover:bg-white/5 rounded-lg transition-all" onclick="toggleMenu()">
+                <i data-lucide="menu" class="text-white w-6 h-6"></i>
+            </button>
         </div>
-      </div>
-    </div>
-  </footer>
+        
+        <!-- Nombre Centrado -->
+        <div class="brand-text-center">ANT-ARA</div>
 
-  <!-- Modal de cursos (ficticio) -->
-  <div id="modal" class="fixed inset-0 hidden items-center justify-center z-50">
-    <div class="absolute inset-0 bg-black/40"></div>
-    <div class="relative bg-white w-11/12 max-w-xl rounded-xl border-2" style="border-color: var(--huint);">
-      <div class="p-6">
-        <h3 id="modalTitle" class="font-title text-2xl" style="color: var(--deep);">Título del curso</h3>
-        <p id="modalText" class="mt-2 text-[color:var(--deep)]/85">
-          Vista previa de módulos, resultados y herramientas incluidas.
-        </p>
-        <div class="mt-6 flex justify-end gap-3">
-          <button id="closeModal" class="btn px-5 py-2 bg-[color:var(--hero)] text-white">Cerrar</button>
-          <a href="#contacto" class="btn px-5 py-2 bg-[color:var(--neon)] text-[color:var(--hero)]">Solicitar información</a>
+        <div class="flex items-center gap-6">
+            <nav class="hidden lg:flex items-center gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">
+                <a href="#soluciones" class="hover:text-cyan transition-all">Soluciones</a>
+                <a href="#casos" class="hover:text-cyan transition-all">Casos</a>
+                <a href="#insights" class="hover:text-cyan transition-all">Insights</a>
+            </nav>
+            <div class="h-8 w-[1px] bg-white/10 hidden md:block"></div>
+            <!-- Avatar de ANTI interactivo -->
+            <div class="anti-avatar-container" onclick="toggleChat()">
+                <div class="anti-avatar-ring"></div>
+                <img src="https://i.imgur.com/oD63qAo.jpeg" class="anti-avatar-img" alt="ANTI AI">
+            </div>
         </div>
-      </div>
+    </header>
+
+    <main class="dash-container">
+        
+        <!-- 1. HERO CONSOLE (BLACK BACKGROUND LOGO) -->
+        <section class="col-span-12 dash-card flex flex-col items-center justify-center text-center min-h-[500px] border-none bg-[#050505]">
+            <!-- Logo Ant-Ara con fondo oscuro -->
+            <img src="https://i.imgur.com/WhmuuWf.png" alt="Ant-Ara Logo" class="h-28 md:h-36 mb-12 drop-shadow-[0_0_40px_rgba(0,245,212,0.1)]">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">Excelencia Estratégica, Ejecución Disciplinada.</h1>
+                <p class="text-white/50 text-lg mb-10 leading-relaxed max-w-2xl mx-auto">
+                    El partner estratégico que las empresas familiares necesitan para escalar sin perder su esencia. <span class="text-cyan">Experiencia • Innovación • Cercanía.</span>
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="toggleChat()" class="btn-main">Iniciar Diagnóstico <i data-lucide="zap"></i></button>
+                    <a href="mailto:contacto@ant-ara.com" class="px-8 py-3 rounded-xl border border-white/10 text-[10px] font-bold uppercase tracking-widest hover:bg-white/5 transition-all">Contactar</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. SOLUCIONES MODULARES -->
+        <section id="soluciones" class="col-span-12 lg:col-span-7 dash-card">
+            <div class="flex justify-between items-center mb-10">
+                <h2 class="text-2xl font-bold tracking-wide">Comandos Estratégicos</h2>
+                <span class="px-3 py-1 bg-cyan/10 text-cyan text-[10px] font-bold rounded-full uppercase">Operación Activa</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-6 rounded-2xl bg-white/2 border border-white/5 hover:border-cyan/30 cursor-pointer transition-all flex flex-col items-start">
+                    <i data-lucide="shield-check" class="text-cyan w-8 h-8 mb-4"></i>
+                    <h4 class="font-bold text-sm uppercase mb-2">Blindaje Familiar</h4>
+                    <p class="text-xs text-white/40 leading-relaxed flex-grow">Protección del legado y protocolos de sucesión para la segunda generación.</p>
+                    <button onclick="generateTip('Blindaje Familiar')" class="btn-sparkle">✨ Estrategia IA</button>
+                </div>
+                <div class="p-6 rounded-2xl bg-white/2 border border-white/5 hover:border-cyan/30 cursor-pointer transition-all flex flex-col items-start">
+                    <i data-lucide="cpu" class="text-cyan w-8 h-8 mb-4"></i>
+                    <h4 class="font-bold text-sm uppercase mb-2">Infraestructura IA</h4>
+                    <p class="text-xs text-white/40 leading-relaxed flex-grow">Implementación de procesos inteligentes para recuperar tiempo gerencial.</p>
+                    <button onclick="generateTip('Infraestructura IA')" class="btn-sparkle">✨ Estrategia IA</button>
+                </div>
+                <div class="p-6 rounded-2xl bg-white/2 border border-white/5 hover:border-cyan/30 cursor-pointer transition-all flex flex-col items-start">
+                    <i data-lucide="award" class="text-cyan w-8 h-8 mb-4"></i>
+                    <h4 class="font-bold text-sm uppercase mb-2">Protocolo ICA</h4>
+                    <p class="text-xs text-white/40 leading-relaxed flex-grow">Innovación y automatización de marca para liderazgo de mercado.</p>
+                    <button onclick="generateTip('Protocolo ICA')" class="btn-sparkle">✨ Estrategia IA</button>
+                </div>
+                <div class="p-6 rounded-2xl bg-white/2 border border-white/5 hover:border-cyan/30 cursor-pointer transition-all flex flex-col items-start">
+                    <i data-lucide="trending-up" class="text-cyan w-8 h-8 mb-4"></i>
+                    <h4 class="font-bold text-sm uppercase mb-2">Escalabilidad B2B</h4>
+                    <p class="text-xs text-white/40 leading-relaxed flex-grow">Arquitectura de ventas predictiva para expansión regional.</p>
+                    <button onclick="generateTip('Escalabilidad B2B')" class="btn-sparkle">✨ Estrategia IA</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. CHAMPIONS IA WIDGET -->
+        <section class="col-span-12 lg:col-span-5 dash-card flex flex-col justify-between border-cyan/20">
+            <div>
+                <img src="https://i.imgur.com/PSndtgF.png" alt="Champions IA" class="h-10 mb-8">
+                <h3 class="text-2xl font-bold mb-4">Domina la IA y Multiplica Tu Productividad en 4 Semanas</h3>
+                <p class="text-sm text-white/50 leading-relaxed mb-6">El programa de formación definitiva para profesionales que quieren liderar la era de la inteligencia artificial.</p>
+            </div>
+            <div class="space-y-4 mb-8">
+                <div class="flex items-center gap-3 text-xs text-white/70">
+                    <i data-lucide="check-circle" class="text-cyan w-4 h-4"></i> Prompting Maestro aplicado a negocios
+                </div>
+                <div class="flex items-center gap-3 text-xs text-white/70">
+                    <i data-lucide="check-circle" class="text-cyan w-4 h-4"></i> Automatización de flujos de trabajo
+                </div>
+                <div class="flex items-center gap-3 text-xs text-white/70">
+                    <i data-lucide="check-circle" class="text-cyan w-4 h-4"></i> IA Generativa para toma de decisiones
+                </div>
+            </div>
+            <a href="https://innovacionconalejandro.github.io/vers-3-landing-page-champion-course/" target="_blank" class="w-full py-4 bg-white text-ant-shadow rounded-xl font-black text-center text-xs uppercase tracking-widest hover:bg-cyan transition-all">Explorar Programa</a>
+        </section>
+
+        <!-- 4. INSIGHTS / ANALIZADOR IA -->
+        <section id="insights" class="col-span-12 py-10">
+            <div class="flex items-center gap-4 mb-12">
+                <h2 class="text-4xl font-bold">Ant-Ara Insights</h2>
+                <div class="h-[1px] flex-grow bg-white/10"></div>
+                <p class="text-[10px] font-bold text-white/40 uppercase tracking-widest">Estrategia & Innovación</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Analizador IA Block -->
+                <div class="dash-card md:col-span-1 flex flex-col border-cyan/40 bg-[#0A1A17]">
+                    <h3 class="font-bold text-lg mb-4 text-cyan uppercase tracking-tighter">✨ Analizador de Escenarios</h3>
+                    <p class="text-xs text-white/50 mb-6">Describe tu situación empresarial y recibe un análisis táctico preliminar de nuestra IA.</p>
+                    <textarea id="scenario-input" placeholder="Ej: Mi empresa familiar tiene problemas delegando a la 2da generación..." class="bg-black/40 border border-white/10 rounded-xl p-4 text-xs text-white mb-4 h-32 focus:outline-none focus:border-cyan transition-all"></textarea>
+                    <button onclick="analyzeScenario()" class="btn-main w-full justify-center">✨ Obtener Análisis</button>
+                    <div id="scenario-result" class="mt-4 text-[10px] text-white/60 leading-relaxed overflow-y-auto max-h-40"></div>
+                </div>
+
+                <!-- Mockup 1 -->
+                <div class="reel-mockup group cursor-pointer shadow-2xl">
+                    <div class="w-full h-full bg-[#111] flex flex-col items-center justify-center p-10">
+                        <i data-lucide="users" class="w-16 h-16 text-cyan/20 group-hover:text-cyan transition-all mb-4"></i>
+                        <p class="text-xs text-white/30 text-center uppercase tracking-widest">Empresas Familiares</p>
+                    </div>
+                    <div class="reel-overlay">
+                        <h4 class="text-white font-bold text-lg">El reto de la sucesión: Cómo preparar el legado digital.</h4>
+                    </div>
+                </div>
+                <!-- Mockup 2 -->
+                <div class="reel-mockup group cursor-pointer shadow-2xl">
+                    <div class="w-full h-full bg-[#0a0a0a] flex flex-col items-center justify-center p-10 border-x border-white/5">
+                        <i data-lucide="zap" class="w-16 h-16 text-cyan/20 group-hover:text-cyan transition-all mb-4"></i>
+                        <p class="text-xs text-white/30 text-center uppercase tracking-widest">IA Aplicada</p>
+                    </div>
+                    <div class="reel-overlay">
+                        <h4 class="text-white font-bold text-lg">3 Automatizaciones que tu gerencia necesita hoy mismo.</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CHECKOUT -->
+        <section class="col-span-12 dash-card flex flex-col md:flex-row items-center justify-between gap-10 bg-[#0A1A17] border-cyan/20 p-10 mt-10">
+            <div class="max-w-md text-center md:text-left">
+                <h2 class="text-3xl font-bold mb-4">Diagnóstico Estratégico 2026</h2>
+                <p class="text-sm text-white/50 mb-6 leading-relaxed">Sesión de consultoría personalizada de 60 minutos para identificar cuellos de botella y trazar una ruta crítica.</p>
+                <div class="flex items-center gap-4 justify-center md:justify-start">
+                    <i data-lucide="calendar" class="text-cyan w-5 h-5"></i>
+                    <span class="text-xs font-bold uppercase tracking-widest">Disponibilidad en tiempo real</span>
+                </div>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="text-5xl font-black text-cyan mb-8">$199.00 <span class="text-xs text-white/40 uppercase tracking-widest font-normal">USD</span></div>
+                <div class="flex flex-col gap-4 w-full min-w-[300px]">
+                    <a href="https://paypal.me/innovarconalejandro" target="_blank" class="w-full bg-[#0070ba] py-3 rounded-xl flex items-center justify-center hover:brightness-110 transition-all">
+                        <img src="https://www.paypalobjects.com/webstatic/mktg/logo-center/PP_Acceptance_Marks_for_LogoCenter_266x142.png" class="h-6">
+                    </a>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-black border border-white/20 rounded-xl py-3 flex items-center justify-center gap-2 cursor-pointer hover:bg-white/5 transition-all"><i data-lucide="apple" class="w-4 h-4"></i> Pay</div>
+                        <div class="bg-white text-black rounded-xl py-3 flex items-center justify-center font-bold text-sm cursor-pointer hover:bg-gray-100 transition-all">G Pay</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#03060C] border-t border-white/5 pt-24 pb-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 mb-20">
+            <div class="max-w-xs">
+                <img src="https://i.imgur.com/WhmuuWf.png" alt="Ant-Ara" class="h-8 mb-8">
+                <p class="text-white/30 text-xs leading-relaxed uppercase tracking-widest mb-6 font-bold">Experiencia • Excelencia • Innovación</p>
+                <p class="text-xs text-white/20 leading-relaxed">Estrategias diseñadas para proteger el pasado y conquistar el futuro de las empresas familiares.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-16">
+                <div>
+                    <h5 class="text-cyan text-[10px] font-bold uppercase tracking-widest mb-8">Legal</h5>
+                    <nav class="flex flex-col gap-4 text-[10px] text-white/40 uppercase font-bold">
+                        <a href="#" class="hover:text-white transition-all">Privacidad</a>
+                        <a href="#" class="hover:text-white transition-all">Términos</a>
+                    </nav>
+                </div>
+                <div>
+                    <h5 class="text-cyan text-[10px] font-bold uppercase tracking-widest mb-8">Ecosistema</h5>
+                    <nav class="flex flex-col gap-4 text-[10px] text-white/40 uppercase font-bold">
+                        <a href="https://innovarconalejandro.com" target="_blank" class="hover:text-white transition-all">Innovar con Alejandro</a>
+                        <a href="mailto:contacto@ant-ara.com" class="hover:text-white transition-all">Contacto</a>
+                    </nav>
+                </div>
+                <div>
+                    <h5 class="text-cyan text-[10px] font-bold uppercase tracking-widest mb-8">Conectar</h5>
+                    <nav class="flex flex-col gap-4 text-[10px] text-white/40 uppercase font-bold">
+                        <a href="https://linkedin.com/in/ant-ara-gt" target="_blank" class="hover:text-white transition-all">LinkedIn</a>
+                        <a href="https://t.me/productividadconia" target="_blank" class="hover:text-white transition-all">Telegram</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="text-center border-t border-white/5 pt-12">
+            <p class="text-[10px] text-white/20 uppercase tracking-[0.4em]">© 2025 Ant-Ara Strategic Group. Ciudad de Guatemala.</p>
+        </div>
+    </footer>
+
+    <!-- ANTI CHAT WINDOW -->
+    <div id="anti-chat-window" class="fixed bottom-6 right-6 w-[380px] h-[600px] bg-[#0E1116] border border-cyan/20 rounded-3xl overflow-hidden hidden flex-col z-[2000] shadow-[0_0_50px_rgba(0,0,0,0.8)]">
+        <div class="p-6 bg-cyan/10 border-b border-white/5 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full border border-cyan p-1 bg-ant-shadow shadow-[0_0_15px_rgba(0,245,212,0.3)]">
+                    <img src="https://i.imgur.com/oD63qAo.jpeg" class="w-full h-full rounded-full object-cover" alt="ANTI AI">
+                </div>
+                <div>
+                    <p class="text-xs font-black leading-none">ANTI AI</p>
+                    <p class="text-[9px] text-cyan uppercase tracking-widest mt-1">Consultor Senior • Ant-Ara</p>
+                </div>
+            </div>
+            <button onclick="toggleChat()" class="text-white/40 hover:text-white transition-all"><i data-lucide="x" class="w-5 h-5"></i></button>
+        </div>
+        <div id="chat-messages" class="flex-1 overflow-y-auto p-6 space-y-4 text-sm bg-[#0E1116] scroll-smooth">
+            <div class="bg-white/5 p-4 rounded-2xl rounded-tl-none border border-white/5 text-white/80 leading-relaxed shadow-sm">
+                Hola, socio. Soy <strong>ANTI</strong>, Consultor Senior de Ant-Ara Strategic Group. <br><br>
+                ¿Cuál es el desafío estratégico más urgente en tu empresa hoy? Cuéntame tu situación y tracemos una ruta ahora mismo.
+            </div>
+        </div>
+        <div class="p-6 border-t border-white/5 bg-[#0E1116] flex gap-2">
+            <input type="text" id="user-input" placeholder="Describa su desafío..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-cyan text-white transition-all">
+            <button onclick="sendMessage()" class="bg-cyan text-ant-shadow p-3 rounded-xl hover:scale-105 active:scale-95 transition-all"><i data-lucide="send" class="w-4 h-4"></i></button>
+        </div>
     </div>
-  </div>
 
-  <script>
-    // Año dinámico
-    document.getElementById('year').textContent = new Date().getFullYear();
+    <!-- Mobile Navigation Menu (Mockup) -->
+    <div id="mobile-menu" class="fixed inset-0 bg-[#0E1116]/95 z-[3000] hidden flex-col items-center justify-center p-10 backdrop-blur-md">
+        <button class="absolute top-10 right-10 text-white" onclick="toggleMenu()"><i data-lucide="x" class="w-8 h-8"></i></button>
+        <nav class="flex flex-col gap-10 text-center uppercase tracking-[0.3em] font-black text-2xl">
+            <a href="#soluciones" onclick="toggleMenu()" class="hover:text-cyan transition-all">Soluciones</a>
+            <a href="#casos" onclick="toggleMenu()" class="hover:text-cyan transition-all">Casos</a>
+            <a href="#insights" onclick="toggleMenu()" class="hover:text-cyan transition-all">Insights</a>
+            <a href="mailto:contacto@ant-ara.com" class="text-cyan text-lg mt-10">Contactar</a>
+        </nav>
+    </div>
 
-    // Contenidos de cursos para modal
-    const modalData = {
-      aifpc: {
-        title: 'AIFPC® — Automatización para PYMEs',
-        text: 'Mapeo de procesos, selección de herramientas y creación de flujos que ahorran horas semanales.'
-      },
-      gaipc: {
-        title: 'GAIPC® — Dashboards con IA',
-        text: 'Métricas que importan, narrativa visual y tableros que conectan datos con decisiones.'
-      },
-      aipmfpc: {
-        title: 'AIPMFPC™ — Ética aplicada a IA',
-        text: 'Dilemas reales de sesgo, privacidad y transparencia con marcos de decisión responsables.'
-      },
-      smpc: {
-        title: 'SMPC® — Productividad personal con IA',
-        text: 'Organización, foco y hábitos sostenibles sin sobrecarga digital usando IA como apoyo.'
-      }
-    };
+    <script>
+        // Initialize Lucide
+        lucide.createIcons();
 
-    const modal = document.getElementById('modal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalText = document.getElementById('modalText');
-    const closeModal = document.getElementById('closeModal');
+        // 60fps Cursor
+        const aura = document.getElementById('cursor-aura');
+        const dot = document.getElementById('cursor-dot');
+        let mouseX = 0, mouseY = 0;
+        let auraX = 0, auraY = 0;
 
-    document.querySelectorAll('[data-open]').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        const key = btn.getAttribute('data-open');
-        const d = modalData[key];
-        if(d){ modalTitle.textContent = d.title; modalText.textContent = d.text; }
-        modal.classList.remove('hidden'); modal.classList.add('flex');
-      });
-    });
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            if(dot) {
+                dot.style.left = mouseX + 'px';
+                dot.style.top = mouseY + 'px';
+            }
+        });
 
-    closeModal.addEventListener('click', ()=>{ modal.classList.add('hidden'); modal.classList.remove('flex'); });
-    modal.addEventListener('click', (e)=>{ if(e.target===modal.firstElementChild){ modal.classList.add('hidden'); modal.classList.remove('flex'); } });
+        function animateCursor() {
+            if(aura) {
+                auraX += (mouseX - auraX) * 0.1;
+                auraY += (mouseY - auraY) * 0.1;
+                aura.style.transform = `translate(${auraX}px, ${auraY}px) translate(-50%, -50%)`;
+            }
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
 
-    // FAQ acordeón
-    document.querySelectorAll('.faq-q').forEach(q=>{
-      q.addEventListener('click', ()=>{
-        const parent = q.parentElement;
-        const a = parent.querySelector('.faq-a');
-        const icon = q.querySelector('svg');
-        const open = !a.classList.contains('hidden');
-        document.querySelectorAll('#faq .faq-a').forEach(el=>el.classList.add('hidden'));
-        document.querySelectorAll('#faq .faq-q svg').forEach(el=>el.classList.remove('rotate-90'));
-        if(open){ a.classList.add('hidden'); }
-        else { a.classList.remove('hidden'); icon.classList.add('rotate-90'); }
-      });
-    });
+        // Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
 
-    // Form demo
-    function handleDemoSubmit(e){
-      e.preventDefault();
-      const res = document.getElementById('formResult');
-      res.classList.remove('hidden');
-      e.target.reset();
-      res.scrollIntoView({behavior:'smooth', block:'center'});
-    }
-    window.handleDemoSubmit = handleDemoSubmit;
-  </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f1957b32b73a30',t:'MTc1Nzg3MDcyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+        // Chat Toggle
+        function toggleChat() {
+            const chat = document.getElementById('anti-chat-window');
+            chat.classList.toggle('hidden');
+            chat.style.display = chat.classList.contains('hidden') ? 'none' : 'flex';
+        }
+
+        // --- GEMINI API INTEGRATION ---
+        const apiKey = "";
+
+        async function callGemini(prompt, systemPrompt) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            const maxRetries = 5;
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) throw new Error('API request failed');
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text || "Sin respuesta.";
+                } catch (error) {
+                    if (i === maxRetries - 1) throw error;
+                    await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
+                }
+            }
+        }
+
+        // Anti Chat Function
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const messages = document.getElementById('chat-messages');
+            const userText = input.value.trim();
+            if (!userText) return;
+
+            messages.innerHTML += `<div class="bg-cyan/10 p-4 rounded-2xl rounded-tr-none self-end border border-cyan/20 max-w-[85%] ml-auto text-right font-semibold text-cyan shadow-sm">${userText}</div>`;
+            input.value = '';
+            messages.scrollTop = messages.scrollHeight;
+
+            const loadingId = 'loading-' + Date.now();
+            messages.innerHTML += `<div id="${loadingId}" class="flex items-center gap-2 text-[9px] text-white/20 italic tracking-widest uppercase py-2"><div class="spinner"></div> ANTI está analizando...</div>`;
+
+            try {
+                const systemPrompt = "Eres ANTI, Consultor Senior de Ant-Ara Strategic Group. Experto en PYMES guatemaltecas. Ofrece insights tácticos de máximo 4 oraciones y redirige al diagnóstico de $199.";
+                const response = await callGemini(userText, systemPrompt);
+                document.getElementById(loadingId).remove();
+                messages.innerHTML += `<div class="bg-white/5 p-4 rounded-2xl rounded-tl-none border border-white/5 text-white/80 leading-relaxed shadow-sm">${response}</div>`;
+            } catch (error) {
+                document.getElementById(loadingId).innerText = "Error de conexión estratégica.";
+            }
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        // ✨ Strategy Tip Function
+        async function generateTip(category) {
+            toggleChat(); // Open chat to show results
+            const messages = document.getElementById('chat-messages');
+            messages.innerHTML += `<div class="bg-white/5 p-3 rounded-xl border border-white/10 text-[10px] text-white/40 italic">✨ Generando consejo para ${category}...</div>`;
+            messages.scrollTop = messages.scrollHeight;
+
+            try {
+                const prompt = `Dame un consejo táctico inmediato para el pilar de ${category} en una empresa familiar guatemalteca.`;
+                const systemPrompt = "Eres un estratega experto de Ant-Ara. Da consejos cortos, directos y con autoridad ejecutiva.";
+                const response = await callGemini(prompt, systemPrompt);
+                messages.innerHTML += `<div class="bg-cyan/10 p-4 rounded-xl border border-cyan/30 text-white/80 text-xs"><strong>✨ Tip Estratégico (${category}):</strong><br>${response}</div>`;
+            } catch (error) {
+                console.error(error);
+            }
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        // ✨ Scenario Analyzer Function
+        async function analyzeScenario() {
+            const input = document.getElementById('scenario-input');
+            const resultDiv = document.getElementById('scenario-result');
+            const userText = input.value.trim();
+            if (!userText) return;
+
+            resultDiv.innerHTML = '<div class="flex items-center gap-2 text-cyan font-bold"><div class="spinner"></div> Analizando...</div>';
+
+            try {
+                const systemPrompt = "Eres el Analizador de Escenarios de Ant-Ara. Tu tarea es recibir un problema empresarial, identificar el pilar estratégico de Ant-Ara correspondiente y dar 3 pasos iniciales de resolución. Usa un tono serio, ejecutivo y guatemalteco.";
+                const response = await callGemini(userText, systemPrompt);
+                resultDiv.innerHTML = `<div class="p-3 bg-white/5 rounded-lg border border-white/10 text-white/80 font-medium">✨ Análisis Completado:</div><div class="mt-2">${response}</div>`;
+            } catch (error) {
+                resultDiv.innerHTML = '<span class="text-red-500">Error en el análisis. Intente de nuevo.</span>';
+            }
+        }
+
+        document.getElementById('user-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
+    </script>
+</body>
 </html>
